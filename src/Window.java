@@ -28,7 +28,7 @@ class Window extends JFrame{
 		}
 		
 		// Setting up the layout of the panel
-		getContentPane().setLayout(new GridLayout(20,20,0,0));
+		getContentPane().setLayout(new GridLayout(height,width,0,0));
 		
 		// Start & pauses all threads, then adds every square of each thread to the panel
 		for(int i=0;i<width;i++){
