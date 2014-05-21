@@ -21,7 +21,7 @@ class Window extends JFrame{
 		for(int i=0;i<width;i++){
 			data= new ArrayList<DataOfSquare>();
 			for(int j=0;j<height;j++){
-				DataOfSquare c = new DataOfSquare(2);
+				DataOfSquare c = new DataOfSquare(SquareStatus.EMPTY);
 				data.add(c);
 			}
 			Grid.add(data);

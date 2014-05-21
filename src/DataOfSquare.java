@@ -1,24 +1,24 @@
-import java.util.ArrayList;
 import java.awt.Color;
+import java.util.HashMap;
 
 public class DataOfSquare {
 
 	
-	//ArrayList that'll Contain the Colors
-	private ArrayList<Color> listOfColors =new ArrayList<Color>();
-	private int color; //2: snake , 1: food, 0:empty 
+	//Arraymap that'll Contain the Colors
+	private HashMap<SquareStatus,Color> mapOfColors = new HashMap<SquareStatus,Color>();
+	
 	private SquarePanel square;
-	public DataOfSquare(int col){
+	public DataOfSquare(SquareStatus s){
 		
-		//Lets add the Color to the arrayList
-		listOfColors.add(Color.DARK_GRAY);//0
-		listOfColors.add(Color.BLUE);    //1
-		listOfColors.add(Color.white);   //2
-		color=col;
-		square = new SquarePanel(listOfColors.get(color));
+		//Lets add the Color to the arraymap
+		mapOfColors.put(SquareStatus.EMPTY, Color.WHITE);//0
+		mapOfColors.put(SquareStatus.FOOD,Color.BLUE);    //1
+		mapOfColors.put(SquareStatus.SNAKE,Color.DARK_GRAY);   //2
+		
+		square = new SquarePanel(mapOfColors.get(s));
 	}
-	public void lightMeUp(int c){
-		square.ChangeColor(listOfColors.get(c));
+	public void changeStatus(SquareStatus s){
+		square.ChangeColor(mapOfColors.get(s));
 	}
 	public SquarePanel getSquare(){
 		return square;

@@ -79,7 +79,7 @@ public class ThreadsController extends Thread {
 	 
 	 //Put food in a position and displays it
 	 private void spawnFood(Tuple foodPositionIn){
-		 	Squares.get(foodPositionIn.x).get(foodPositionIn.y).lightMeUp(1);
+		 	Squares.get(foodPositionIn.x).get(foodPositionIn.y).changeStatus(SquareStatus.FOOD);
 	 }
 	 
 	 //return a position not occupied by the snake
@@ -138,7 +138,7 @@ public class ThreadsController extends Thread {
 		 for(Tuple t : positions){
 			 int y = t.getX();
 			 int x = t.getY();
-			 Squares.get(x).get(y).lightMeUp(0);
+			 Squares.get(x).get(y).changeStatus(SquareStatus.SNAKE);
 			 
 		 }
 	 }
@@ -150,7 +150,7 @@ public class ThreadsController extends Thread {
 		 for(int i = positions.size()-1;i>=0;i--){
 			 if(cmpt==0){
 				 Tuple t = positions.get(i);
-				 Squares.get(t.y).get(t.x).lightMeUp(2);
+				 Squares.get(t.y).get(t.x).changeStatus(SquareStatus.EMPTY);
 			 }
 			 else{
 				 cmpt--;
