@@ -21,8 +21,7 @@ public class SquarePanel extends JPanel{
 	public void paintComponent(Graphics g){
 		
 		g.setColor(c);
-		
-		g.drawOval(0, 0, getWidth(), getHeight());
+		g.fillOval(0, 0, getWidth(), getHeight());
 	}
 	
 }

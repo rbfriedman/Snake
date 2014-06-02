@@ -3,11 +3,13 @@ import java.util.ArrayList;
 
 //Controls all the game logic .. most important class in this project.
 public class ThreadsController extends Thread {
+	
 	 ArrayList<ArrayList<DataOfSquare>> Squares= new ArrayList<ArrayList<DataOfSquare>>();
 	 Tuple headSnakePos;
 	 int sizeSnake=3;
 	 long speed = 50;
 	 public static int directionSnake ;
+	 public boolean isActive = true;
 
 	 ArrayList<Tuple> positions = new ArrayList<Tuple>();
 	 Tuple foodPosition;
@@ -18,6 +20,7 @@ public class ThreadsController extends Thread {
 		//Get all the threads
 		Squares=Window.Grid;
 		
+		
 		headSnakePos=new Tuple(positionDepart.x,positionDepart.y);
 		directionSnake = 1;
 
@@ -27,12 +30,12 @@ public class ThreadsController extends Thread {
 		
 		foodPosition= new Tuple(Window.height-1,Window.width-1);
 		spawnFood(foodPosition);
-
+		
 	 }
 	 
 	 //Important part :
 	 public void run() {
-		 while(true){
+		 while(isActive){
 			 moveInterne(directionSnake);
 			 checkCollision();
 			 moveExterne();
@@ -72,16 +75,21 @@ public class ThreadsController extends Thread {
 	 public void restart(){
 		
 		//Get all the threads
+		 
+		 activate();
 				Squares=Window.Grid;
 				
+				sizeSnake =3;
 				headSnakePos=new Tuple(10,10);
 				directionSnake = 1;
 
 				//!!! Pointer !!!!
 				Tuple headPos = new Tuple(headSnakePos.getX(),headSnakePos.getY());
-				positions.add(headPos);
 				
+				positions.add(headPos);
+				clearFood();
 				foodPosition= new Tuple(Window.height-1,Window.width-1);
+				
 				spawnFood(foodPosition);
 		
 	 }
@@ -92,7 +100,11 @@ public class ThreadsController extends Thread {
 			 pauser();
 		 }
 	 }
-	 
+	 //Empty square containing previous food
+	 private void clearFood(){
+		 
+		 Squares.get(foodPosition.x).get(foodPosition.y).changeStatus(SquareStatus.EMPTY);
+	 }
 	 //Put food in a position and displays it
 	 private void spawnFood(Tuple foodPositionIn){
 		 	Squares.get(foodPositionIn.x).get(foodPositionIn.y).changeStatus(SquareStatus.FOOD);
@@ -182,4 +194,12 @@ public class ThreadsController extends Thread {
 			 }
 		 }
 	 }
+
+	public void deactivate() {
+		isActive = false;
+		
+	}
+	public void activate(){
+		isActive = true;
+	}
 }
